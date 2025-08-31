@@ -1,0 +1,29 @@
+name: Self-Hosted Runner Example
+
+on:
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  build:
+    runs-on: [linux, x64]
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Print runner info
+        run: |
+          echo "Running on self-hosted runner"
+          echo "OS: $RUNNER_OS"
+          echo "Architecture: $RUNNER_ARCH"
+          echo "Workspace: $GITHUB_WORKSPACE"
+
+      - name: Run a script
+        run: |
+          echo "This is running on my machine"
+          uname -a  # Prints OS details
+          whoami    # Prints current user
+
+      - name: Use environment variables
+        run: |
+          echo "Repo: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF"
